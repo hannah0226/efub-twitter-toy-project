@@ -12,13 +12,15 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class TweetResponseDto {
     private Long tweetId;
+    private Long writerId;
     private String writer;
     private String content;
     private LocalDateTime createDate;
     private LocalDateTime modifyDate;
 
-    public TweetResponseDto(Long tweetId, String writer, String content, LocalDateTime createDate, LocalDateTime modifyDate){
+    public TweetResponseDto(Long tweetId, Long writerId, String writer, String content, LocalDateTime createDate, LocalDateTime modifyDate){
         this.tweetId=tweetId;
+        this.writerId=writerId;
         this.writer=writer;
         this.content=content;
         this.createDate=createDate;
@@ -28,6 +30,7 @@ public class TweetResponseDto {
     public static TweetResponseDto from(Tweet tweet){
         return new TweetResponseDto(
                 tweet.getTweetId(),
+                tweet.getWriter().getAccountId(),
                 tweet.getWriter().getNickname(),
                 tweet.getContent(),
                 tweet.getCreatedDate(),
