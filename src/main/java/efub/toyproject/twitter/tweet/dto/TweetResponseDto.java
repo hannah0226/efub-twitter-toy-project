@@ -16,15 +16,13 @@ public class TweetResponseDto {
     private String writer;
     private String content;
     private LocalDateTime createDate;
-    private LocalDateTime modifyDate;
 
-    public TweetResponseDto(Long tweetId, Long writerId, String writer, String content, LocalDateTime createDate, LocalDateTime modifyDate){
+    public TweetResponseDto(Long tweetId, Long writerId, String writer, String content, LocalDateTime createDate){
         this.tweetId=tweetId;
         this.writerId=writerId;
         this.writer=writer;
         this.content=content;
         this.createDate=createDate;
-        this.modifyDate=modifyDate;
     }
 
     public static TweetResponseDto from(Tweet tweet){
@@ -33,8 +31,7 @@ public class TweetResponseDto {
                 tweet.getWriter().getAccountId(),
                 tweet.getWriter().getNickname(),
                 tweet.getContent(),
-                tweet.getCreatedDate(),
-                tweet.getModifiedDate()
+                tweet.getCreatedDate()
         );
     }
 }
