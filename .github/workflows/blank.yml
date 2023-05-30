@@ -38,12 +38,17 @@ jobs:
       run: chmod +x gradlew
 
     - uses: actions/checkout@v2
-    - run: touch ./src/main/resources/application.yml
-    - run: echo "${{env.APPLICATION}}" > ./src/main/resources/application.yml
-    - uses: actions/upload-artifact@v2
-      with:
-        name: application.yml
-        path: ./src/main/resources/application.yml
+    - name: make application-database.yaml
+      run: |
+          ## create application-database.yaml
+          cd ./src/main/resources
+          
+          # application-database.yaml 파일 생성
+          touch ./application.yml
+          
+          # GitHub-Actions 에서 설정한 값을 application-database.yaml 파일에 쓰기
+          echo "${{ secrets.DATABASE }}" >> ./application.yml
+        shell: bash
 
     - name: Build with Gradle
       uses: gradle/gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
